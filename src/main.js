@@ -1,7 +1,12 @@
 // Brandon Apuntar
 // Super Mega Blasteroids 9
+// Movement taken from Nathan Altice Movement Studies
+// https://github.com/nathanaltice/MovementStudies
 
 'use strict'
+
+//global variables
+let cursors
 
 let config = {
     type: Phaser.AUTO,
@@ -10,7 +15,10 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false
+            debug: false,
+            gravity: {
+                y: 0
+            }
         }
     },
     scene: [Load, Menu, Play]
