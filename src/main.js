@@ -22,7 +22,7 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Credits, Play, GameOver]
+    scene: [Load, Menu, Credits, Play, Win, GameOver]
 }
 
 //reserve keyboard bindings

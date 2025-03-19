@@ -9,6 +9,15 @@ class Menu extends Phaser.Scene {
 
     create() {
 
+        // make music
+        this.music = this.sound.add('menu', {
+            loop: true, 
+            volume: 0.5
+        })
+        
+        this.music.play()
+        console.log("Is the music looping?", this.music.loop); // should return true
+
         // scrolling background
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0)
 
@@ -35,6 +44,7 @@ class Menu extends Phaser.Scene {
         this.starfield.tilePositionY -=0.3
 
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            //this.music.stop()
             this.scene.start('playScene')
             
         }

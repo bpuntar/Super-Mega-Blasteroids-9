@@ -24,9 +24,13 @@ class Play extends Phaser.Scene {
         //ship lives
         this.lives = 3
 
+        // delayed death flag
+        this.isDead = false
+
     }
 
     create() {
+
         // scrolling background
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0)
 
@@ -130,7 +134,8 @@ class Play extends Phaser.Scene {
             },
             callbackScope: this,
             loop: true 
-        });
+        })
+
     }
 
     createAsteroid() {
@@ -201,7 +206,8 @@ class Play extends Phaser.Scene {
 
     hitPlayer(ship, asteroid) {
         this.sound.play('explosion')
-    
+
+
         asteroid.setActive(false)
         asteroid.setVisible(false)
         asteroid.body.reset(-500, -500)
@@ -224,15 +230,17 @@ class Play extends Phaser.Scene {
         if (this.lives <= 0) {
             this.scene.start('gameoverScene', { score: this.score })
         }  else {
+            this.isDead = true
             ship.setVisible(false);
             ship.setActive(false);
 
             this.time.delayedCall(1000, () => {  
                 ship.setPosition(game.config.width/2, game.config.height * 0.8);
-                ship.setVisible(true);  
-                ship.setActive(true);   
-                ship.setVelocity(0, 0); 
-                ship.setAngularVelocity(0); 
+                ship.setVisible(true)  
+                ship.setActive(true)   
+                ship.setVelocity(0, 0)
+                ship.setAngularVelocity(0)
+                this.isDead = false
             })
         }
     
@@ -240,7 +248,11 @@ class Play extends Phaser.Scene {
     }
 
 
+
     fireMissile() {
+
+        if (this.isDead) return
+
         let missile = this.missiles.get(this.ship.x, this.ship.y); 
 
         if (missile) {
@@ -274,6 +286,7 @@ class Play extends Phaser.Scene {
 
 
     update() {
+
         // scrolling background speed
         this.starfield.tilePositionY -=1
 
@@ -308,5 +321,8 @@ class Play extends Phaser.Scene {
             }
         })
 
+        if (this.score >= 1000) {
+            this.scene.start('winScene', { score: this.score });
+        }
     }   
 }

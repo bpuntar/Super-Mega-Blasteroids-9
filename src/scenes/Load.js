@@ -20,6 +20,8 @@ class Load extends Phaser.Scene {
         this.load.audio('laser', 'laser.wav')
         this.load.audio('explosion', 'explosion.wav')
         this.load.audio('fly', 'fly.wav')
+        this.load.audio('menu', 'menu.wav')
+        this.load.audio('game', 'game.wav')
 
         //fonts
         this.load.bitmapFont('p2p', 'p2p.png', 'p2p.xml')

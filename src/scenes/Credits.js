@@ -9,7 +9,7 @@ class Credits extends Phaser.Scene {
 
         //credits text
         this.add.bitmapText(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'p2p', 'Inspired by: Fosters Home for Imaginary Friends', 16).setOrigin(0.5)
-        this.add.bitmapText(game.config.width/2, game.config.height/2, 'p2p', 'All assets created by Brandon Apuntar in Piskel and jsfxr ', 16).setOrigin(0.5)
+        this.add.bitmapText(game.config.width/2, game.config.height/2, 'p2p', 'All assets created by Brandon Apuntar in Piskel, jsfxr, BeepBox ', 12).setOrigin(0.5)
         this.add.bitmapText(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'p2p', 'Left arrow: Start game', 25).setOrigin(0.5)
         this.add.bitmapText(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 40, 'p2p', 'Right arrow: Menu', 25).setOrigin(0.5)
         
