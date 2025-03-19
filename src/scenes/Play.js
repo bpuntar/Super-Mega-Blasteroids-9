@@ -31,7 +31,7 @@ class Play extends Phaser.Scene {
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0)
 
         //score text
-        this.scoreText = this.add.text(20, 20, 'score: 0'), {
+        this.scoreText = this.add.bitmapText(20, 20, 'p2p', 'score: 0', 20), {
             fontSize: '32px',
             font: 'arcade',
             fill: '#ffffff'
@@ -60,6 +60,26 @@ class Play extends Phaser.Scene {
         this.ship.setDamping(this.DAMP)
         this.ship.setDrag(this.DRAG)
         this.ship.setCollideWorldBounds(true)
+
+        // instructions text
+        this.instructionsText = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'p2p', 'Blast the asteroids!', 15).setOrigin(0.5);
+        this.instructionsTextTwo = this.add.bitmapText(game.config.width / 2, game.config.height / 2 - 30, 'p2p', 'Use Arrow Keys to Move and Space to Shoot!', 15).setOrigin(0.5);
+        
+        // Set the color of the text to red
+        this.instructionsText.setTint(0xFF0000); // Red color
+
+        // text timer fade
+        this.time.delayedCall(5000, () => {
+            this.tweens.add({
+                targets: this.instructionsText,
+                targets: this.instructionsTextTwo,
+                alpha: 0, 
+                duration: 2000, 
+                onComplete: () => {
+                    this.instructionsText.setActive(false).setVisible(false)
+                }
+            })
+        })
 
         // missiles
         cursors = this.input.keyboard.createCursorKeys();
@@ -200,8 +220,20 @@ class Play extends Phaser.Scene {
             }
         }
 
+        // ship reset upon death
         if (this.lives <= 0) {
             this.scene.start('gameoverScene', { score: this.score })
+        }  else {
+            ship.setVisible(false);
+            ship.setActive(false);
+
+            this.time.delayedCall(1000, () => {  
+                ship.setPosition(game.config.width/2, game.config.height * 0.8);
+                ship.setVisible(true);  
+                ship.setActive(true);   
+                ship.setVelocity(0, 0); 
+                ship.setAngularVelocity(0); 
+            })
         }
     
 

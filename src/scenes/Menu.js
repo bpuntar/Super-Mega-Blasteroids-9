@@ -9,35 +9,40 @@ class Menu extends Phaser.Scene {
 
     create() {
 
-        let menuConfig = {
-            fontFamily: 'Optima',
-            fontSize: '40px',
-            backgroundColor: '#37a7ff',
-            color: '#3355ff',
-            align: 'right',
-            padding: {
-            top: 5,
-            bottom: 5,
-            },
-            fixedWidth: 0
-        }
+        // scrolling background
+        this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0)
+
+        // menu text
+        this.add.bitmapText(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'p2p', 'Super Mega Blasteroids 9', 32).setOrigin(0.5)
+        this.add.bitmapText(game.config.width/2, game.config.height/2, 'p2p', 'By Brandon Apuntar', 32).setOrigin(0.5)
+        //menuConfig.backgroundColor = '#37a7ff'
+        //menuConfig.color = '#3355ff'
+        this.add.bitmapText(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'p2p', 'Left arrow: Start game', 25).setOrigin(0.5)
+        this.add.bitmapText(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 40, 'p2p', 'Right arrow: Credits', 25).setOrigin(0.5)
+        console.log("Checking if font exists:", this.cache.bitmapFont.exists('p2p'))
+
+
         
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Super Mega Blasteroids 9', menuConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2, 'By Brandon Apuntar', menuConfig).setOrigin(0.5)
-        menuConfig.backgroundColor = '#37a7ff'
-        menuConfig.color = '#3355ff'
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press < to start', menuConfig).setOrigin(0.5)
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
 
     }
 
     update() {
+
+        // scrolling background speed
+        this.starfield.tilePositionY -=0.3
+
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start('playScene')
             
         }
 
-    }
+        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+            this.scene.start('creditsScene')
 
+        }
+
+    }
 }

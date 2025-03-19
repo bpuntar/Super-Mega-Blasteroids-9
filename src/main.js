@@ -12,6 +12,7 @@ let config = {
     type: Phaser.AUTO,
     height: 640,
     width: 960,
+    pixelArt: true,
     physics: {
         default: 'arcade',
         arcade: {
@@ -21,11 +22,12 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Play, GameOver]
+    scene: [Load, Menu, Credits, Play, GameOver]
 }
 
 //reserve keyboard bindings
 let keyLEFT
+let keyRIGHT
 
 let game = new Phaser.Game(config)
 

@@ -11,27 +11,23 @@ class GameOver extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor('#000000'); 
 
+        // game over
+        const gameOverText = this.add.bitmapText(game.config.width / 2, game.config.height / 4, 'p2p', 'GAME OVER', 25)
+            .setOrigin(0.5, 0.5)
+            .setScale(1)
+            .setTint(0xFF0000); 
 
-        const gameOverText = this.add.text(game.config.width / 2, game.config.height / 4, 'GAME OVER', {
-            fontSize: '128px',
-            font: 'Optima',
-            fill: '#FF0000'
-        }).setOrigin(0.5, 0.5).setScale(3)
+        // score
+        const scoreText = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'p2p', `Score: ${this.score}`, 20)
+            .setOrigin(0.5, 0.5)
+            .setScale(1)
+            .setTint(0xFFFFFF);  
 
-
-        const scoreText = this.add.text(game.config.width / 2, game.config.height / 2, `Score: ${this.score}`, {
-            fontSize: '32px',
-            font: 'Optima',
-            fill: '#FFFFFF'
-        }).setOrigin(0.5, 0.5).setScale(3)
-
-
-        const restartText = this.add.text(game.config.width / 2, game.config.height * 0.75, 'Press R to Restart', {
-            fontSize: '32px',
-            font: 'Optima',
-            fill: '#FFFFFF'
-        }).setOrigin(0.5, 0.5).setScale(3)
-
+        // restart
+        const restartText = this.add.bitmapText(game.config.width / 2, game.config.height * 0.75, 'p2p', 'Press R to Restart', 20)
+            .setOrigin(0.5, 0.5)
+            .setScale(1)
+            .setTint(0xFFFFFF); 
 
         this.input.keyboard.on('keydown-R', () => {
             this.scene.start('playScene');  
